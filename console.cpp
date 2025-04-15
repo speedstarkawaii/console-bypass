@@ -1,6 +1,8 @@
 // warning: read license or ill come after u 👍
+// keep credits
+// thanks me the king speedster for making it 
 
-typedef struct _PEB {
+typedef struct _PEB { // https://learn.microsoft.com/en-us/windows/win32/api/winternl/ns-winternl-peb
     BYTE Reserved1[2];
     BYTE BeingDebugged;
     BYTE Reserved2[1];
@@ -9,7 +11,7 @@ typedef struct _PEB {
     PVOID ProcessParameters;
 } PEB;
 
-typedef struct _RTL_USER_PROCESS_PARAMETERS {
+typedef struct _RTL_USER_PROCESS_PARAMETERS { // https://learn.microsoft.com/en-us/windows/win32/api/winternl/ns-winternl-rtl_user_process_parameters
     BYTE Reserved1[16];
     HANDLE ConsoleHandle;
 } RTL_USER_PROCESS_PARAMETERS;
@@ -28,8 +30,8 @@ void inject(){
 if (peb != nullptr && peb->ProcessParameters != nullptr) {
     RTL_USER_PROCESS_PARAMETERS* pm = (RTL_USER_PROCESS_PARAMETERS*)peb->ProcessParameters;
 
-    pm->ConsoleHandle = 0;
+    pm->ConsoleHandle = 0; //important to not mess around with it or set to any value youll get instantly temp flagged until reboot. it means roblox will no longer launch 
 }
-else {
+else { .// failed ah
 }
 }
